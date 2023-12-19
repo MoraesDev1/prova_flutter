@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prova_flutter/Pages/home_page.dart';
 import 'package:prova_flutter/Utils/fundo.dart';
 import 'package:prova_flutter/Widgets/custom_label.dart';
 import 'package:prova_flutter/Widgets/custom_textfield.dart';
@@ -15,7 +16,13 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
 
-  _clickEnter() {}
+  _clickEnter() {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+      (route) => false,
+    );
+  }
 
   _esconderTeclado() {
     FocusScope.of(context).requestFocus(FocusNode());
@@ -80,8 +87,8 @@ class _LoginPageState extends State<LoginPage> {
 
 _abreUrl() async {
   String url = 'https://google.com.br';
-  final Uri url_uri = Uri.parse(url);
-  if (!await launchUrl(url_uri)) {
+  final Uri uri = Uri.parse(url);
+  if (!await launchUrl(uri)) {
     throw Exception('Could not launch $url');
   }
 }
