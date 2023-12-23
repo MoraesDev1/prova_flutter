@@ -1,14 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   final bool obscureText;
   final Icon icon;
   final TextEditingController controller;
-  const CustomTextField(
+  String? Function(String? value)? validator;
+  CustomTextField(
       {super.key,
       required this.obscureText,
       required this.icon,
-      required this.controller});
+      required this.controller,
+      required String? Function(String? value)? validator});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -21,6 +25,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         Expanded(
           child: TextFormField(
+            validator: widget.validator,
             controller: widget.controller,
             obscureText: widget.obscureText,
             cursorColor: const Color(0xff1e4e62),
